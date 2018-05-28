@@ -6,18 +6,18 @@ Unlike Q learning which is a offline updating method, Sarsa is updating while in
 You will see the sarsa is more coward when punishment is close because it cares about all behaviours,
 while q learning is more brave because it only cares about maximum behaviour.
 """
-from RL_brain.sarsa import SarsaTable
+from RL_brain.sarsa_and_q_learning import SarsaTable
 from games.maze_game import Maze
 
 
 def update():
-    for episode in range(100):
+    for episode in range(200):
         # initial observation
         observation = env.reset()
 
         # RL choose action based on observation
         action = RL.choose_action(str(observation))
-
+        print "episode", episode
         while True:
             # fresh env
             env.render()
@@ -49,3 +49,4 @@ if __name__ == "__main__":
 
     env.after(100, update)
     env.mainloop()
+    RL.plot_cost()

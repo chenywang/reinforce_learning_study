@@ -15,8 +15,9 @@ class RL(object):
         self.lr = learning_rate
         self.gamma = reward_decay
         self.epsilon = e_greedy
-
         self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)
+        self.cost_his = list()
+        self.last_loss = max
 
     def check_state_exist(self, state):
         if state not in self.q_table.index:
@@ -33,18 +34,25 @@ class RL(object):
         self.check_state_exist(observation)
         # action selection
         if np.random.rand() < self.epsilon:
-            # choose best action
-            state_action = self.q_table.loc[observation, :]
-            state_action = state_action.reindex(np.random.permutation(state_action.index))     # some actions have same value
-            action = state_action.idxmax()
-        else:
             # choose random action
             action = np.random.choice(self.actions)
+        else:
+            # choose best action
+            state_action = self.q_table.loc[observation, :]
+            state_action = state_action.reindex(
+                np.random.permutation(state_action.index))  # some actions have same value
+            action = state_action.idxmax()
         return action
 
     def learn(self, *args):
         pass
 
+    def plot_cost(self):
+        import matplotlib.pyplot as plt
+        plt.plot(np.arange(len(self.cost_his)), self.cost_his)
+        plt.ylabel('Cost')
+        plt.xlabel('training steps')
+        plt.show()
 
 # off-policy
 class QLearningTable(RL):
@@ -59,6 +67,10 @@ class QLearningTable(RL):
         else:
             q_target = r  # next state is terminal
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
+
+        self.cost_his.append(self.lr * (q_target - q_predict))
+        self.last_loss = self.lr * (q_target - q_predict)
+        self.epsilon -= 0.001
 
 
 # on-policy
@@ -75,3 +87,5 @@ class SarsaTable(RL):
         else:
             q_target = r  # next state is terminal
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
+
+        self.cost_his.append(self.lr * (q_target - q_predict))

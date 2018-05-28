@@ -9,7 +9,7 @@ from games.maze_game import Maze
 
 def run_maze(env, RL):
     step = 0    # 用来控制什么时候学习
-    for episode in range(300):
+    for episode in range(3000):
         # 初始化环境
         observation = env.reset()
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
                       e_greedy=0.9,
                       replace_target_iter=200,  # 每 200 步替换一次 target_net 的参数
                       memory_size=2000, # 记忆上限
-                      # output_graph=True   # 是否输出 tensorboard 文件
+                      output_graph=False   # 是否输出 tensorboard 文件
                       )
     run_maze(env, RL)
     # env.after(100, run_maze)

@@ -9,7 +9,7 @@ sys.setdefaultencoding('utf-8')
 def run_Mountain_Car(env, RL):
     total_steps = 0
 
-    for i_episode in range(10):
+    for i_episode in range(120):
 
         observation = env.reset()
         ep_r = 0
@@ -32,11 +32,9 @@ def run_Mountain_Car(env, RL):
 
             ep_r += reward
             if done:
-                get = '| Get' if observation_[0] >= env.unwrapped.goal_position else '| ----'
-                print('Epi: ', i_episode,
-                      get,
-                      '| Ep_r: ', round(ep_r, 4),
-                      '| Epsilon: ', round(RL.epsilon, 2))
+                print('episode: ', i_episode,
+                      'ep_r: ', round(ep_r, 2),
+                      ' epsilon: ', round(RL.epsilon, 2))
                 break
 
             observation = observation_

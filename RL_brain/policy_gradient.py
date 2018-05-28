@@ -46,6 +46,7 @@ class PolicyGradient:
             tf.summary.FileWriter("logs/", self.sess.graph)
 
         self.sess.run(tf.global_variables_initializer())
+        self.cost_his = []
 
     def _build_net(self):
         with tf.name_scope('inputs'):
@@ -120,4 +121,10 @@ class PolicyGradient:
         discounted_ep_rs /= np.std(discounted_ep_rs)
         return discounted_ep_rs
 
+    def plot_cost(self):
+        import matplotlib.pyplot as plt
+        plt.plot(np.arange(len(self.cost_his)), self.cost_his)
+        plt.ylabel('Cost')
+        plt.xlabel('training steps')
+        plt.show()
 

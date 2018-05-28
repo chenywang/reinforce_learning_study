@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from RL_brain.policy_gradient import PolicyGradient
 
 DISPLAY_REWARD_THRESHOLD = 400  # renders environment if total episode reward is greater then this threshold
-RENDER = False  # rendering wastes time
+RENDER = True  # rendering wastes time
 
 env = gym.make('CartPole-v0')
 env.seed(1)     # reproducible, general Policy gradient has high variance
@@ -31,7 +31,7 @@ RL = PolicyGradient(
     n_features=env.observation_space.shape[0],
     learning_rate=0.02,
     reward_decay=0.99,
-    # output_graph=True,
+    output_graph=True,
 )
 
 for i_episode in range(3000):

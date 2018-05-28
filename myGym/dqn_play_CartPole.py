@@ -10,7 +10,7 @@ def run_Carte_Pole(env, RL):
 
     total_steps = 0  # 记录步数
 
-    for i_episode in range(1000):
+    for i_episode in range(120):
 
         # 获取回合 i_episode 第一个 observation
         observation = env.reset()
