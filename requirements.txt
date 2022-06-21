@@ -48,7 +48,7 @@ mujoco-py==1.50.1.56
 networkx==2.1
 numba==0.38.0
 numexpr==2.6.5
-numpy==1.14.3
+numpy==1.22.0
 opencv-python==3.4.0.12
 pandas==0.21.1
 pathlib2==2.3.0
