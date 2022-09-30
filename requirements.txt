@@ -35,7 +35,7 @@ imbalanced-learn==0.3.3
 imblearn==0.0
 ipython==5.1.0
 ipython-genutils==0.2.0
-joblib==0.11
+joblib==1.2.0
 jsonschema==2.6.0
 llvmlite==0.23.0
 Markdown==2.6.11
